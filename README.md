@@ -1,0 +1,60 @@
+# DID-Comp
+
+## Decentralised & Privacy Preserving Querying
+
+This repository hosts the implementation of a decentralised and privacy-preserving querying system. This approach enables secure and private communication for SQL query processing between different parties using decentralised identifiers (DIDs) & secure multi-party computation (sMPC).
+
+### Supported Platforms
+
+- Linux
+
+### Overview
+
+The system comprises two main agents: Alice and Bob. Alice acts as the querier, initiating SQL queries via a web interface, while Bob serves as the query responder, processing these queries and returning results to Alice's web interface. 
+
+
+Communication between Alice and Bob is facilitated using DIDComm, ensuring that SQL queries and responses are exchanged securely and privately. The system leverages SMCQL for executing SQL queries, employing secure multiparty computation (sMPC) techniques to ensure the privacy of the data during processing. 
+
+This approach enables the system to compute results over encrypted data, allowing multiple parties to collaborate on data analysis or query execution without revealing their individual datasets to each other, thus maintaining data privacy and security throughout the process.
+
+![alt text](/readme-assets/diagram.png?raw=true)
+
+### Self-Sovereign Identity (SSI) Framework
+
+The DIDComm protocol used in this project utilises the Self-Sovereign Identity (SSI) framework implemented in [veritable-cloudagent](https://github.com/digicatapult/veritable-cloudagent). This framework provides the foundational elements for secure and private communication using decentralised identifiers.
+
+### Submodules:
+
+This project utilises the `veritable-cloudagent` repository as a submodule. You can find the repository here: [veritable-cloudagent](https://github.com/digicatapult/veritable-cloudagent).
+
+Additionally, this project utilises the `smcql-experiment` repository as a submodule, a modified version of [smcql](https://github.com/smcql/smcql). You can find the repository here: [smcql-experiment](https://github.com/CDECatapult/smcql-experiment/).
+
+### Web Interfaces
+
+The system includes a web interface for the end user acting as Alice, enabling easy interaction with the application.
+
+- **Alice's Web Interface**: You can access Alice's web interface by navigating to [http://localhost:3200](http://localhost:3200) in your web browser. This interface allows you to interact with Alice, initiate SQL queries, and observe the results.
+
+### Getting Started
+
+Ensure to clone this repository with the ```--recursive``` option to clone all the relevant submodules.
+```bash
+git clone --recursive https://github.com/digicatapult/did-comp.git
+```
+
+To get started with this system, you can use the provided scripts to start and stop the application.
+
+#### Starting the Application
+```bash
+./scripts/start.sh
+```
+
+#### Stopping the Application
+```bash
+./scripts/stop.sh
+```
+
+### Flow
+Alice (Querier): Initiates SQL queries via the web interface and sends them to Bob using DIDComm for secure and private communication.
+
+Bob (Query Responder): Receives SQL queries from Alice, processes them using SMCQL, and sends back the results via DIDComm, displayed on Alice's web interface.

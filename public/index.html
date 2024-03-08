@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>SQL Query Portal</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+</head>
+
+<body>
+    <h1>SQL Query Portal</h1>
+
+    <div id="editorContainer">
+        <textarea id="messageContent" placeholder="Enter your SQL query">SELECT mineral_id, SUM(mass_in_storage) FROM test_query_1_table GROUP BY mineral_id</textarea>
+    </div>
+
+    <!-- Button to trigger API actions -->
+    <button id="callApiButton">Send query</button>
+
+    <!-- Element to display API responses -->
+    <div id="logContainer" class="log-container">
+        <h2>Latest query result:</h2>
+        <p id="latestMessage"></p>
+    </div>
+
+    <script>
+        const callApiButton = document.getElementById("callApiButton");
+    
+        // Function to fetch the latest message
+        async function fetchLatestMessage() {
+            try {
+                const response = await fetch(`http://127.0.0.1:3200/get-latest-response`);
+                if (!response.ok) {
+                    throw new Error('Failed to fetch the latest message');
+                }
+                const data = await response.json();
+                // This will now exclusively refer to the content from "/get-latest-response"
+                return data.messageContent;
+            } catch (error) {
+                console.error('fetchLatestMessage error:', error);
+                throw error;
+            }
+        }
+    
+            // Function to log the latest message or error
+    async function logLatestMessage(latestResponseContent) {
+        const logContainer = document.getElementById("latestMessage");
+        
+        // Clear previous contents
+        logContainer.innerHTML = '';
+
+        // Example response: (mineral_id, EXPR$1)[Au, 3500]
+        // Extract headers and values
+        const matches = latestResponseContent.match(/\((.*?)\)\[(.*?)\]/);
+        if (matches) {
+            const headers = matches[1].split(', ');
+            const values = matches[2].split(', ');
+
+            // Create a table
+            const table = document.createElement('table');
+            table.setAttribute('style', 'width:100%; text-align:left;');
+
+            // Create header row
+            const thead = document.createElement('thead');
+            const headerRow = document.createElement('tr');
+            headers.forEach(header => {
+                const th = document.createElement('th');
+                th.textContent = header;
+                headerRow.appendChild(th);
+            });
+            thead.appendChild(headerRow);
+            table.appendChild(thead);
+
+            // Create body row
+            const tbody = document.createElement('tbody');
+            const valueRow = document.createElement('tr');
+            values.forEach(value => {
+                const td = document.createElement('td');
+                td.textContent = value;
+                valueRow.appendChild(td);
+            });
+            tbody.appendChild(valueRow);
+            table.appendChild(tbody);
+
+            // Append table to logContainer
+            logContainer.appendChild(table);
+        } else {
+            logContainer.textContent = 'Latest message format is not recognized.';
+        }
+    }
+    
+        callApiButton.addEventListener("click", async () => {
+            try {
+                // Step 1 to 3: Interaction steps with the backend
+                await fetch(`http://127.0.0.1:3200/create-invitation`);
+                await new Promise(resolve => setTimeout(resolve, 1000));
+        
+                await fetch(`http://127.0.0.1:3200/receive-invitation`);
+                await new Promise(resolve => setTimeout(resolve, 1000));
+        
+                await fetch(`http://127.0.0.1:3200/get-connections`);
+                await new Promise(resolve => setTimeout(resolve, 1000));
+        
+                // Step 4: Sending the query/message from the textarea input
+                const queryContent = document.getElementById("messageContent").value.trim(); // Renamed for clarity
+                await fetch(`http://127.0.0.1:3200/send-message`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ messageContent: queryContent }) // Object property name as required by the backend
+                });
+                await new Promise(resolve => setTimeout(resolve, 30000));
+        
+                // Step 5: Fetching and displaying the latest message
+                const latestMessageContent = await fetchLatestMessage(); // Fetches the latest "received" message content
+                await logLatestMessage(latestMessageContent);
+            } catch (error) {
+                // Handle any errors during the process
+                await logLatestMessage(`Error: ${error.message}`);
+            }
+        });
+    </script>    
+    
+</body>
+
+</html>

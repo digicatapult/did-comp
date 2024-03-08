@@ -1,0 +1,94 @@
+/* styles.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+h1 {
+    color: #333;
+}
+
+button {
+    background-color: #0073e6;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #005bad;
+}
+
+#editorContainer {
+    display: flex;
+    justify-content: center; /* Center the editor container horizontally */
+}
+
+#messageContent {
+    flex: 1;
+    margin: 10px; /* Add margin for spacing */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    resize: vertical;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    background-color: #fff; /* Updated background color to white */
+    color: #333;
+    font-family: 'Courier New', monospace;
+    height: 300px; /* Increased height */
+}
+
+.log-container table {
+    width: 100%;
+    border-collapse: collapse; /* Collapse borders */
+}
+
+.log-container th, .log-container td {
+    border: 1px solid #ddd; /* Add border to cells */
+    padding: 8px; /* Adjust padding as needed */
+    text-align: left; /* Align text to left */
+}
+
+.log-container th {
+    background-color: #f2f2f2; /* Background color for header */
+    color: #333;
+}
+
+/* Optional: Add more styles for zebra striping or hover effects */
+.log-container tr:nth-child(even) {background-color: #f2f2f2;} /* Zebra striping for rows */
+.log-container tr:hover {background-color: #ddd;} /* Hover effect for rows */
+
+.log-container h2 {
+    margin-bottom: 10px;
+}
+
+.log-message {
+    margin-bottom: 5px;
+}
+
+.user-message {
+    color: #007bff;
+}
+
+.server-message {
+    color: #28a745;
+}
+
+.error-message {
+    color: #dc3545;
+}
+
+/* Adjusted styles to move buttons below messageContent */
+#callApiButton,
+#resetConnectionButton {
+    margin-top: 10px;
+}
