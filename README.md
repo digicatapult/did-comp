@@ -10,15 +10,15 @@ This repository hosts the implementation of a decentralised and privacy-preservi
 
 ### Overview
 
-The system comprises two main agents: Alice and Bob. Alice acts as the querier, initiating SQL queries via a web interface, while Bob serves as the query responder, processing these queries and returning results to Alice's web interface. 
+The system comprises two main agents: Alice and Bob. Alice acts as the querier, initiating SQL queries via a web interface, while Bob serves as the query responder, processing these queries and returning results to Alice's web interface.  Additionally, there are two remote sites who hold data that can be queried.  Alice can be thought of as a 'client' querying a distributed network of data, and Bob a 'network node' that can query data sources.  The system leverages SMCQL for executing SQL queries across remote sites, employing secure MPC and differential privacy techniques to ensure the privacy of the data during processing.
 
-Setup involves the remote sites agreeing on a database schema according to which they will store data to be queried.  This schema is published so that Alice and any other party knows what queries they can make.
+Setup involves the remote sites agreeing on a database schema according to which they will store data.  This schema is published so that Alice and any other party knows what queries they can make.
 
-When Bob receives a query from Alice, he compiles it into MPC protocol.  This privacy-preserving protocol is then run by the two remote sites, who return the query result to Bob.  The result is that Bob receives a response as if he had queried a single unified database.  The privacy guarantee is that Bob learns nothing about how data is distributed between remote sites: he only learns the query response.  Additionally, the remote sites learn nothing about each other's data.  In this proof-of-concept work, the remote sites trust Bob to compile a protocol that respects the privacy of data they hold.  Trust relationships are described further in the [smcql-experiment](https://github.com/digicatapult/smcql-experiment) repository.
+When Bob receives a query from Alice, he compiles it into MPC protocol.  This privacy-preserving protocol is then run by the two remote sites, who return their outputs to Bob.  From these outputs, Bob can construct a response to Alice's query that looks as if he had queried a single unified database that he owns.  The privacy guarantee is that Bob learns nothing about how data is distributed between remote sites: he only learns the query response.  Additionally, the remote sites learn nothing about each other's data.  In this proof-of-concept work, the remote sites trust Bob to compile a protocol that respects privacy of data they hold.  Trust relationships are described further in the [smcql-experiment](https://github.com/digicatapult/smcql-experiment) repository.
 
-Communication between Alice and Bob is facilitated using DIDComm, ensuring that SQL queries and responses are exchanged securely and privately. The system leverages SMCQL for executing SQL queries, employing secure multiparty computation (sMPC) techniques to ensure the privacy of the data during processing. 
+Communication between Alice and Bob is facilitated using DIDComm, ensuring that SQL queries and responses are exchanged securely and privately. 
 
-This approach enables the system to compute results over encrypted data, allowing multiple parties to collaborate on data analysis or query execution without revealing their individual datasets to each other, thus maintaining data privacy and security throughout the process.
+This approach enables the system to compute results over private data, allowing multiple parties to collaborate on data analysis or query execution without revealing their individual datasets to each other, thus maintaining data privacy and security throughout the process.
 
 ![alt text](/readme-assets/diagram.png?raw=true)
 
