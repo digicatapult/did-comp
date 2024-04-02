@@ -10,7 +10,7 @@ This repository hosts the implementation of a decentralised and privacy-preservi
 
 ### Overview
 
-The system comprises two main agents: Alice and Bob. Alice acts as the querier, initiating SQL queries via a web interface, while Bob serves as the query responder, processing these queries and returning results to Alice's web interface.  Additionally, there are two remote sites who hold data that can be queried.  Alice can be thought of as a 'client' querying a distributed network of data, and Bob a 'network node' that can query data sources.  The system leverages SMCQL for executing SQL queries across remote sites, employing secure MPC and differential privacy techniques to ensure the privacy of the data during processing.
+The system comprises two main agents: Alice and Bob. Alice acts as the querier, initiating SQL queries via a web interface, while Bob serves as the query responder, processing these queries and returning results to Alice's web interface.  Additionally, there are two remote sites who hold data that can be queried.  Alice can be thought of as a 'client' querying a distributed network of data, and Bob a 'network node' that can query data sources.  The system leverages [SMCQL](https://github.com/smcql/smcql) for executing SQL queries across remote sites, employing secure MPC and differential privacy techniques to ensure the privacy of the data during processing.
 
 Setup involves the remote sites agreeing on a database schema according to which they will store data.  This schema is published so that Alice and any other party knows what queries they can make.
 
