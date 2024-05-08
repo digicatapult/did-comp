@@ -6,7 +6,6 @@
 .gitignore
 .prettierrc
 
-package.json
 broker
 logs
 node_modules
