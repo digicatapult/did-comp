@@ -1,6 +1,7 @@
 [submodule "veritable-cloudagent"]
-	path = veritable-cloudagent
-	url = https://github.com/digicatapult/veritable-cloudagent.git
+    path = veritable-cloudagent
+    url = https://github.com/digicatapult/veritable-cloudagent.git
+
 [submodule "smcql-experiment"]
-	path = smcql-experiment
-	url = https://github.com/CDECatapult/smcql-experiment.git
+    path = smcql-experiment
+	url = https://github.com/digicatapult/smcql-experiment.git
