@@ -4,3 +4,5 @@
 [submodule "smcql-experiment"]
 	path = smcql-experiment
 	url = https://github.com/CDECatapult/smcql-experiment.git
+[submodule "https://github.com/digicatapult/smcql-experiment.git"]
+	url = smcql-experiment
