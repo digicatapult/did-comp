@@ -1,4 +1,4 @@
-# Contributing to z
+# Contributing to DID-Comp
 
 Firstly, we would like to thank you for taking the time to contribute!
 
