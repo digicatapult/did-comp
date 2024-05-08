@@ -49,7 +49,7 @@ app.get("/create-invitation", async (req, res) => {
     // Step 1: Prepare the JSON object with the required information as the request data
     const data = JSON.stringify({
       handshake: true,
-      handshakeProtocols: ["https://didcomm.org/connections/1.0"],
+      handshakeProtocols: ["https://didcomm.org/didexchange/1.x"],
       multiUseInvitation: true,
       autoAcceptConnection: true
     });
